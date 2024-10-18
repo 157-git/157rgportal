@@ -1,0 +1,132 @@
+.applicantjobcard {
+    border: 1px solid gray; 
+    border-radius: 8px; 
+    margin: 40px auto; 
+    max-width: 800px; 
+    width: 700px; 
+    background-color: white;
+    text-align: left; 
+    position: relative; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color:gray;
+    padding-bottom: 20px;
+    margin-bottom: 15px;
+    margin-top: 25px;
+    margin-left: 10px;
+    padding-top: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+  
+    
+  }
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .top-section {
+    display: flex;
+    align-items: flex-start; /* Align items at the top */
+    margin-bottom: 20px;
+  }
+  
+  .top-section img {
+    margin-right: 20px; /* Space between image and the content */
+  }
+  
+  .info-section {
+    flex: 1;
+  }
+  
+  .info-section h2 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .info-section p {
+    margin: 5px 0;
+  }
+  
+  .bottom-section p {
+    margin: 5px 0;
+  }
+  
+  /* Add styles for responsive design if needed */
+  @media (max-width: 768px) {
+    .top-section {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .top-section img {
+      margin-right: 0;
+      margin-bottom: 15px;
+    }
+  
+    .info-section {
+      text-align: center;
+    }
+  
+  
+  h2 {
+    font-size: 1.8em; 
+    margin-bottom: 10px; 
+    font-weight: bold;
+  }
+  
+  p {
+    margin: 10px 0; 
+  }
+
+ 
+  .view-more-btn {
+    font-size: 16px;
+    border-radius: 15px;
+    border: 1px solid gray;
+    background-color: #ffcb9b;
+    color: white;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: absolute;
+    margin-left: 10px;
+    size: 50px;
+  }
+  
+
+  .view-more-btn:hover {
+    background-color: white;
+    color: gray;
+   
+  
+  }
+ 
+
+.card-content {
+  display: flex;
+  justify-content: space-between; 
+  align-items: flex-start; 
+  flex-direction: column; 
+  margin-top: 0px;
+ 
+}
+
+  
+  .expanded-details {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd; 
+    background-color: #f2f2f2;
+    padding-left: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    font-family: 'Roboto',sans-serif;
+    
+  }
+  
+}

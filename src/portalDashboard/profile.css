@@ -1,0 +1,32 @@
+/* Profile.css */
+.profile-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+  
+  .profile-options {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .profile-options li {
+    margin: 10px 0;
+  }
+  
+  .profile-options a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .profile-options a:hover {
+    color: #007bff;
+  }

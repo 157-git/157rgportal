@@ -1,0 +1,28 @@
+.recruiter-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .main-content {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .cards-section {
+    width: 70%; /* Take up 70% of the width */
+  }
+  
+  .resume-section {
+    width: 30%; /* Take up 30% of the width */
+    padding-left: 20px;
+    border-left: 1px solid #ccc; /* Add a separator between cards and resume */
+  }
+  
+  .resume-content {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+ 
