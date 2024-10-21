@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
 import "./JobList.css";
 import { useParams } from "react-router-dom";
 import { Button, Modal, Form } from "react-bootstrap";
 import axios from 'axios';
+import { RWebShare } from "react-web-share";
+import ApplicantForm from './ApplicantForm';
 
 
 const Candidate = ({selectedRole}) => {
@@ -82,6 +84,18 @@ const Candidate = ({selectedRole}) => {
     // Close the modal after submission
     handleClose();
   };
+
+  const [showForm, setShowForm] = useState(false);
+
+  const handleApplyClick = () => {
+    setShowForm(true);
+  };
+
+  // Hardcoded base URL for sharing
+  const shareUrl ="http://93.127.199.85/157industries/${employeeId}/${userType}/candidate-form";
+
+ 
+
 
   useEffect(() => {
     // replaced base url with actual url just for testing by sahil karnekar please replace it with base url at the time of deployment
@@ -280,9 +294,10 @@ const Candidate = ({selectedRole}) => {
   }
 
 
+  //   This is added by vaibhavi kawarkhe date : 21-10-2024
   
   // Function to toggle status
-  //
+  
   const handleToggleStatus = async () => {
     const newStatus = currentStatus === 'active' ? 'inactive' : 'active'; // Toggle status
     const confirmChange = window.confirm(`Are you sure you want to change the JD status to ${newStatus}?`);
@@ -294,6 +309,21 @@ const Candidate = ({selectedRole}) => {
       setMessage(`JD status changed to ${newStatus} successfully!`);
     } catch (error) {
       setMessage(`Failed to update JD status: ${error.message}`);
+    }
+  };
+
+  // Function to delete JD by ID
+  const handleDeleteJD = async () => {
+    const confirmDelete = window.confirm(`Are you sure you want to delete JD with ID ${jdId}?`);
+    if (!confirmDelete) return;
+
+    try {
+      await axios.delete(`http://localhost:8082/api/jd/${jdId}`);
+      setMessage(`JD with ID ${jdId} deleted successfully!`);
+      setJdId(''); // Clear the ID input after deletion
+      setCurrentStatus('active'); // Reset status
+    } catch (error) {
+      setMessage(`Failed to delete JD: ${error.message}`);
     }
   };
 
@@ -347,6 +377,7 @@ const Candidate = ({selectedRole}) => {
                 </button>
               </div>
               <div>
+                   {/*This is added by vaibhavi kawarkhe*/}
                     <div className="refer" onClick={handleShow} >
                       Refer a Friend
                     </div>
@@ -512,14 +543,14 @@ const Candidate = ({selectedRole}) => {
                     >
                       View More
                     </button>
-
+                   {/* This is added by vaibhavi kawarkhe */}
                    {
                     selectedRole ==='candidate' && (
                       
                       <>
-                       <button className="daily-tr-btn">Apply</button>
-                    {/* <button className='daily-tr-btn' onClick={()=>toggleEdm(index)}> EDM  <i id='edm-share-icon'  className="fa-solid fa-eye"></i></button> */}
-
+                       <button className="daily-tr-btn" onClick={handleApplyClick}>Apply</button>
+                       {showForm && <ApplicantForm />} {/* Render the ApplicantForm if showForm is true */}
+                       
                     
                       {/* Request for Callback button */}
                       <div className="daily-tr-btn" >
@@ -528,9 +559,24 @@ const Candidate = ({selectedRole}) => {
 
                   
                   <div>
-                    <div className="daily-tr-btn">
+                    {/* <div className="daily-tr-btn">
                       Share
-                    </div>
+                    </div> */}
+                    <RWebShare
+                    data={{
+                    url: shareUrl, // This will be shared and will open directly in the browser when clicked
+                    //title: "Share Candidate Form",
+                    //text: "Click the link to fill out the candidate form",
+                        }}
+                    >
+                   <div className="shareLink-share-btn-Div">
+           
+                   <button className="daily-tr-btn">Share 🔗</button>
+        
+                  </div>
+                  </RWebShare>
+
+
                   </div>
                       </>
                     )
@@ -543,7 +589,7 @@ const Candidate = ({selectedRole}) => {
       
       <button className="daily-tr-btn" onClick={handleToggleStatus}>Active</button>
 
-      <button className="daily-tr-btn">Delete</button>
+      <button className="daily-tr-btn" onClick={handleDeleteJD}>Delete</button>
     </>
   )
 }

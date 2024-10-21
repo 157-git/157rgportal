@@ -22,13 +22,14 @@ body {
     /* High z-index to stay above other content */
   }
   
-  .buttons {
+  .buttons{
     display: flex; /* Flexbox for button alignment */
     gap: 30px;
     font-size: 16px;
     border-radius: 15px;
     float: right;
     font-family: 'Roboto',sans-serif;
+    
   }
   body {
     font-family: 'Roboto', sans-serif;
@@ -58,7 +59,7 @@ body {
     width: 1000px; /* Adjust container width */
     max-width: 1200px;
      /* Ensure cards don't stretch too much */
-   
+  
      
   }
   
@@ -70,10 +71,11 @@ body {
     flex-direction: column;
     position: fixed;
     gap: 20px;
-    margin: 200px 0 0 0;  
+    margin: 300px 0 0 0;  
     padding: 0%;
     justify-content: center;
     font-family: 'Roboto',sans-serif;
+    
     
   }
   
@@ -187,7 +189,7 @@ body {
       flex-direction: column;
       gap: 10px; /* Space between buttons */
       margin-bottom: 20px;
-    
+   
   }
   .filter-options {
     position: relative; /* Or absolute based on your needs */

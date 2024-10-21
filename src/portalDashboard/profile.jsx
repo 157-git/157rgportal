@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import profileIcon from '../photos/profilepic.jpg';
 import './profile.css';
 
+//This is added by vaibhavi kawarkhe
 const Profile = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true); // Track login status
 

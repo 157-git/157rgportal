@@ -1,6 +1,7 @@
+//This is added by vaibhavi kawarkhe
 import React, { useEffect, useState } from "react";
 import ApplicantJobCard from "./ApplicantJobCard";
-import { jsPDF } from "jspdf";
+//import { jsPDF } from "jspdf";
 import "./header";
 import "./recruiter.css";
 import AddJobDescription from "./AddJobDescription"; // Import the AddJobDescription component
@@ -10,7 +11,6 @@ const Recruiter = ({selectedRole}) => {
   const [candidates, setCandidates] = useState([]);
   const [filteredCandidates, setFilteredCandidates] = useState([]);
   const [expandedCardId, setExpandedCardId] = useState(null);
-  const [selectedResume, setSelectedResume] = useState("");
 
   const [locationFilter, setLocationFilter] = useState("");
   const [experienceFilter, setExperienceFilter] = useState("");
@@ -27,6 +27,7 @@ const Recruiter = ({selectedRole}) => {
   const [showCandidateComponent, setShowCandidateComponent] = useState(false); // New state to toggle between views
 
 
+
   useEffect(() => {
     fetch("http://93.127.199.85/api/ats/157industries/calling-lineup/871/Manager")
       .then((response) => response.json())
@@ -41,17 +42,7 @@ const Recruiter = ({selectedRole}) => {
     setExpandedCardId(expandedCardId === id ? null : id);
   };
 
-  const handleDownloadResume = (resume) => {
-    setSelectedResume(resume);
-    const byteCharacters = atob(resume);
-    const byteNumbers = Array.from(byteCharacters, (char) => char.charCodeAt(0));
-    const byteArray = new Uint8Array(byteNumbers);
-    const decodedResume = new TextDecoder("utf-8").decode(byteArray);
-
-    const doc = new jsPDF();
-    doc.text(decodedResume, 10, 10);
-    doc.save("resume.pdf");
-  };
+  //   This is added by vaibhavi kawarkhe 
 
   const handleFilterChange = () => {
     let filtered = candidates;
@@ -219,8 +210,6 @@ const Recruiter = ({selectedRole}) => {
                     candidate={candidate}
                     isExpanded={expandedCardId === candidate.candidateId}
                     onToggle={() => handleToggle(candidate.candidateId)}
-                    onDownloadResume={() => handleDownloadResume(candidate.resume)}
-                    onViewResume={() => setSelectedResume(candidate.resume)}
                   />
                 ))
               ) : (
@@ -230,6 +219,10 @@ const Recruiter = ({selectedRole}) => {
           )}
         </div>
       )}
+      <div className="resume-file-div">
+
+
+      </div>
     </div>
   );
 };
