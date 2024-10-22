@@ -30,7 +30,7 @@ const Recruiter = ({selectedRole}) => {
   
   const [selectedCandidateResume, setSelectedCandidateResume]=useState(null);
 
-
+  
 
   useEffect(() => {
     fetch("http://93.127.199.85/api/ats/157industries/calling-lineup/871/Manager")
@@ -48,6 +48,7 @@ const Recruiter = ({selectedRole}) => {
 
   //   This is added by vaibhavi kawarkhe 
 
+  
   const handleFilterChange = () => {
     let filtered = candidates;
 
@@ -133,7 +134,7 @@ const Recruiter = ({selectedRole}) => {
     // Function to close the resume modal
     const closeResume = () =>
     {
-      setSelectedCandidateResume("");
+      setSelectedCandidateResume(null);
       setShowResume(false);
     };
   return (
@@ -227,6 +228,8 @@ const Recruiter = ({selectedRole}) => {
                     candidate={candidate}
                     isExpanded={expandedCardId === candidate.candidateId}
                     onToggle={() => handleToggle(candidate.candidateId)}
+                    keyword={keywordFilter} // Pass the keyword filter to the card
+                  
                   />
                 ))
               ) : (
@@ -236,26 +239,27 @@ const Recruiter = ({selectedRole}) => {
           )}
         </div>
       )}
-      <div className="resume-display-section">
-  {showResume && selectedCandidateResume ? (
-    <div className="resume-file-div"> {/* Wrapping resume-content here */}
-      <div className="resume-content">
-        <div className="resume-header">
-          <h2>Resume</h2>
-          <button className="close-button" onClick={closeResume}>X</button>
+      // Render the resume display
+<div className="resume-display-section">
+    {showResume && selectedCandidateResume ? (
+        <div className="resume-file-div">
+            <div className="resume-content">
+                <div className="resume-header">
+                    <h2>Resume</h2>
+                    <button className="close-button" onClick={closeResume}>X</button>
+                </div>
+                <iframe
+                    src={convertToDocumentLink(selectedCandidateResume, "Resume.pdf")} // Ensure this function converts to a valid URL for the PDF
+                    className="resume-iframe"
+                    title="PDF Viewer"
+                ></iframe>
+            </div>
         </div>
-        <iframe
-          src={convertToDocumentLink(selectedCandidateResume, "Resume.pdf")}
-          className="resume-iframe"
-          title="PDF Viewer"
-        ></iframe>
-      </div>
-    </div>
-  ) : (
-    <div className="no-resume-message">
-      <p>No resume available</p>
-    </div>
-  )}
+    ) : (
+        <div className="no-resume-message">
+            <p>No resume available</p>
+        </div>
+    )}
 </div>
     </div>
   );

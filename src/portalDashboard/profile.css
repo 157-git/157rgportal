@@ -1,4 +1,4 @@
-/* Profile.css */
+/*
 .profile-container {
     text-align: center;
     margin-top: 20px;
@@ -30,3 +30,67 @@
   .profile-options a:hover {
     color: #007bff;
   }
+   */
+
+  /* profile.css */
+.profile-page {
+
+  border: 1px solid forestgreen;
+  padding: 400px;
+
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  border: 1px solid red;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.profile-picture {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.profile-content {
+  display: flex;
+  border: 1px solid yellow;
+}
+
+.profile-sidebar {
+  flex: 1;
+  max-width: 200px; /* Set a maximum width for sidebar */
+  padding: 10px;
+  border-right: 1px solid blue; /* Optional: add a border for separation */
+}
+
+.profile-details {
+  flex: 2; /* Take up remaining space */
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.profile-options {
+  list-style-type: none;
+  padding: 0;
+}
+
+.profile-options li {
+  margin: 10px 0;
+}
+
+.profile-options a {
+  text-decoration: none;
+  color: #007bff; /* Bootstrap primary color */
+}
+
+.profile-options a:hover {
+  text-decoration: underline;
+}
