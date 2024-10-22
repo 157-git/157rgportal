@@ -11,13 +11,13 @@ import "./ApplicantJobCard.css";
 import { Button, Modal } from "react-bootstrap";
 
 
-const ApplicantJobCard = ({ candidate, isExpanded, onToggle}) => {
+const ApplicantJobCard = ({openResume, candidate, isExpanded, onToggle}) => {
   
   const formattedExperience = `${candidate.experienceYear} years - ${candidate.experienceMonth} months`;
   
-  const [showResumeModal, setShowResumeModal] = useState(false);
+  const [showResume, setShowResume] = useState(false);
   
-  const [selectedCandidateResume, setSelectedCandidateResume] = useState("");
+  const [selectedCandidateResume, setSelectedCandidateResume]=useState(null);
 
   //This is added by vaibhavi kawarkhe Date:21-10-2024
   // Function to convert byte code to a document link
@@ -49,19 +49,6 @@ const ApplicantJobCard = ({ candidate, isExpanded, onToggle}) => {
     return "Document Not Found";
   };
 
-  // Function to open the resume modal
-  const openResumeModal = (byteCode) => 
-  {
-    setSelectedCandidateResume(byteCode);
-    setShowResumeModal(true);
-  };
-
-  // Function to close the resume modal
-  const closeResumeModal = () =>
-  {
-    setSelectedCandidateResume("");
-    setShowResumeModal(false);
-  };
 
   // Function to download the resume
   const downloadResume = (byteCode) => 
@@ -106,41 +93,8 @@ const ApplicantJobCard = ({ candidate, isExpanded, onToggle}) => {
       <p><HiCurrencyRupee style={{ marginRight: '5px' }} /><strong>Current CTC:</strong> ₹{candidate.currentCTCLakh} Lakh {candidate.currentCTCThousand} Thousand</p>
       <p><CiTimer style={{ marginRight: '5px' }} /><strong>Notice Period:</strong> {candidate.noticePeriod ? candidate.noticePeriod : "N/A"} days</p>
      
-    </div>
-    {/* This is added by vaibhavi kawarkhe Date: 21/10/2024 */}
-    <div className="resume-model-div">
-    <Modal
-                  show={showResumeModal}
-                  onHide={closeResumeModal}
-                  size="lg"
-                  ClassName="custom-modal-height" // Custom class for height control
-                  style={{border:"2px solid red",float:"right",paddingRight:"20px",backgroundColor:"aliceblue"}}
-                >
-                  <Modal.Header closeButton>
-                    <Modal.Title>Resume</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body className="custome-resume" >
-                    {selectedCandidateResume ? (
-                      <iframe
-                        src={convertToDocumentLink(
-                          selectedCandidateResume,
-                          "Resume.pdf"
-                        )}
-                        width="100%"
-                        height="550px"
-                        title="PDF Viewer"
-                      ></iframe>
-                    ) : (
-                      <p>No resume available</p>
-                    )}
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={closeResumeModal}>
-                      Close
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-    </div>
+    
+     </div>
   
       {/*This is added by vaibhavi kawarkhe */}
        <div className="buttons-section">
@@ -167,7 +121,7 @@ const ApplicantJobCard = ({ candidate, isExpanded, onToggle}) => {
             Download Resume
           </button>
 
-          <button className="resume-button" onClick={() => openResumeModal(candidate.resume)}>
+          <button className="resume-button" onClick={() => openResume(candidate.resume)}>
               View Resume
           </button>
           

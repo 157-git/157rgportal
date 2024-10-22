@@ -142,17 +142,62 @@
    padding-right: 15px;
    
   }
-  .custom-modal-height {
-    max-height: 100vh; /* 70% of the viewport height */
-    overflow-y: auto; /* Allows scrolling if the content exceeds the height */
-    background-color: #ffcb9b;
+  
+  .resume-display-section {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 40vw; /* 40% of the viewport width */
+    height: 100vh; /* Full height of the viewport */
+    background-color: aliceblue;
+    border-left: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    z-index: 1050;
+    overflow: hidden;
   }
-
-  .custome-resume{
+  
+  .resume-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     border: 2px solid green;
   }
-
-  .resume-model-div{
-    border: 2px solid yellow;
+  
+  .resume-header {
+    background-color: #ffcb9b;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
+  
+  .resume-header h2 {
+    margin: 0;
   }
+  
+  .close-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .resume-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  
+  .no-resume-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    color: grey;
+  }
+  
+}

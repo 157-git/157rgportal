@@ -26,6 +26,10 @@ const Recruiter = ({selectedRole}) => {
   const [isAddJobDescriptionVisible, setIsAddJobDescriptionVisible] = useState(false); // State to manage Add JD visibility
   const [showCandidateComponent, setShowCandidateComponent] = useState(false); // New state to toggle between views
 
+  const [showResume, setShowResume] = useState(false);
+  
+  const [selectedCandidateResume, setSelectedCandidateResume]=useState(null);
+
 
 
   useEffect(() => {
@@ -119,6 +123,19 @@ const Recruiter = ({selectedRole}) => {
   const handleCloseAddJD = () => {
     setIsAddJobDescriptionVisible(false); // Hide Add JD component
   };
+   // Function to open the resume modal
+   const openResume = (byteCode) => 
+    {
+      setSelectedCandidateResume(byteCode);
+      setShowResume(true);
+    };
+  
+    // Function to close the resume modal
+    const closeResume = () =>
+    {
+      setSelectedCandidateResume("");
+      setShowResume(false);
+    };
   return (
     <div className="App">
       <div className="sidebar">
@@ -219,10 +236,27 @@ const Recruiter = ({selectedRole}) => {
           )}
         </div>
       )}
-      <div className="resume-file-div">
-
-
+      <div className="resume-display-section">
+  {showResume && selectedCandidateResume ? (
+    <div className="resume-file-div"> {/* Wrapping resume-content here */}
+      <div className="resume-content">
+        <div className="resume-header">
+          <h2>Resume</h2>
+          <button className="close-button" onClick={closeResume}>X</button>
+        </div>
+        <iframe
+          src={convertToDocumentLink(selectedCandidateResume, "Resume.pdf")}
+          className="resume-iframe"
+          title="PDF Viewer"
+        ></iframe>
       </div>
+    </div>
+  ) : (
+    <div className="no-resume-message">
+      <p>No resume available</p>
+    </div>
+  )}
+</div>
     </div>
   );
 };
