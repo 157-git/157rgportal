@@ -72,13 +72,14 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 0px;
-  
+    
   }
   
   .butt {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
   }
   
   .jd-share-div {

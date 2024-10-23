@@ -10,6 +10,7 @@ import { IoIosSchool } from "react-icons/io"; //Form qualification icon
 import "./ApplicantJobCard.css";
 //import { Button, Modal } from "react-bootstrap";
 import "./recruiter";
+import { Button } from "react-bootstrap";
 
 const ApplicantJobCard = ({openResume, candidate, isExpanded, onToggle,keyword}) => {
   
@@ -153,10 +154,11 @@ const ApplicantJobCard = ({openResume, candidate, isExpanded, onToggle,keyword})
           </button>
           
            {/* Dropdown to select the file format */}
-            <select onChange={handleFormatChange} value={selectedFormat}>
-        <option value="pdf">Download as PDF</option>
-        <option value="docx">Download as Word</option>
+            <select onChange={handleFormatChange} value={selectedFormat} className="dropdown">
+               <option value="pdf">Download as PDF</option>
+               <option value="docx">Download as Word</option>
             </select>
+
           {/*button for resume download*/} 
           <button className="view-resume-btn" onClick={() => downloadResume(candidate.resume,selectedFormat)}>
             <FaRegFileAlt style={{ marginRight: "5px" }} />

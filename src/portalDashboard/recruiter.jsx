@@ -1,7 +1,6 @@
 //This is added by vaibhavi kawarkhe
 import React, { useEffect, useState } from "react";
-import ApplicantJobCard from "./ApplicantJobCard";
-//import { jsPDF } from "jspdf";
+import ApplicantJobCard from "./ApplicantJobCard"; //Import the ApplicantJobCard component
 import "./header";
 import "./recruiter.css";
 import AddJobDescription from "./AddJobDescription"; // Import the AddJobDescription component
@@ -150,9 +149,11 @@ const Recruiter = ({selectedRole}) => {
       
      
      <button className="toggle-filters" onClick={toggleFiltersVisibility}>
-        {isFiltersVisible ? "Hide Filters" : "Show Filters"}
+        {/* {isFiltersVisible ? "Hide Filters" : "Show Filters"}
+        
       </button>
-      {isFiltersVisible && (
+      {isFiltersVisible && ( */}
+      ShowFilters
         <div className="filters">
           <select value={locationFilter} onChange={(e) => setLocationFilter(e.target.value)}>
             <option value="">All Locations</option>
@@ -196,7 +197,7 @@ const Recruiter = ({selectedRole}) => {
             <option value="msys technologies">msys technologies</option>
           </select>
         </div>
-      )}
+      </button>
        {/* AddJD button below the Toggle Filters button */}
        <button className="add-jd-btn" onClick={handleAddJDClick}>
          AddJD
@@ -229,7 +230,7 @@ const Recruiter = ({selectedRole}) => {
                     isExpanded={expandedCardId === candidate.candidateId}
                     onToggle={() => handleToggle(candidate.candidateId)}
                     keyword={keywordFilter} // Pass the keyword filter to the card
-                  
+                    openResume={openResume}
                   />
                 ))
               ) : (
@@ -239,8 +240,8 @@ const Recruiter = ({selectedRole}) => {
           )}
         </div>
       )}
-      // Render the resume display
-<div className="resume-display-section">
+      
+     <div className="resume-display-section">
     {showResume && selectedCandidateResume ? (
         <div className="resume-file-div">
             <div className="resume-content">
@@ -260,7 +261,7 @@ const Recruiter = ({selectedRole}) => {
             <p>No resume available</p>
         </div>
     )}
-</div>
+    </div>
     </div>
   );
 };
