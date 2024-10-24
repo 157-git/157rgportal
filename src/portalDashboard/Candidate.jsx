@@ -1,14 +1,14 @@
 import React,{ useState, useEffect } from "react";
 import "./JobList.css";
-import { useParams } from "react-router-dom";
-import { Button, Modal, Form } from "react-bootstrap";
+//import { useParams } from "react-router-dom";
+import {  Modal, Form } from "react-bootstrap";
 import axios from 'axios';
 import { RWebShare } from "react-web-share";
 import ApplicantForm from './ApplicantForm';
 
 
 const Candidate = ({selectedRole}) => {
-  const employeeId = 1;
+  //const employeeId = 1;
   const userType = "Applicant";
   const API_BASE_URL = "http://93.127.199.85/api/ats/157industries";
   const [jdId, setJdId] = useState('');

@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 import "./addJobDescription.css";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-//import { API_BASE_URL } from "../api/api";
-// import WebSocketService from '../websocket/WebSocketService';
 
-const AddJobDescription = ({ onClose }) => {
+const AddJobDescription = ({ onClose }) => 
+{
     const API_BASE_URL="http://93.127.199.85/api/ats/157industries";
-  const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState({
     companyName: "",
     designation: "",
     position: "",

@@ -1,4 +1,5 @@
 //This is added by vaibhavi kawarkhe
+
 import React, { useEffect, useState } from "react";
 import ApplicantJobCard from "./ApplicantJobCard"; //Import the ApplicantJobCard component
 import "./header";
@@ -6,7 +7,8 @@ import "./recruiter.css";
 import AddJobDescription from "./AddJobDescription"; // Import the AddJobDescription component
 import Candidate from "./Candidate"; // Import Candidate component
 
-const Recruiter = ({selectedRole}) => {
+const Recruiter = ({selectedRole}) => 
+{
   const [candidates, setCandidates] = useState([]);
   const [filteredCandidates, setFilteredCandidates] = useState([]);
   const [expandedCardId, setExpandedCardId] = useState(null);
@@ -17,8 +19,6 @@ const Recruiter = ({selectedRole}) => {
   const [jobDesignationFilter, setJobDesignationFilter] = useState("");
   const [qualificationFilter, setQualificationFilter] = useState(""); 
   const [companyFilter, setCompanyFilter] = useState("");
-  const [isFiltersVisible, setIsFiltersVisible] = useState(false);
-  
   const [keywordFilter, setKeywordFilter] = useState("");
   const [filterCount, setFilterCount] = useState(0);
 
@@ -31,7 +31,8 @@ const Recruiter = ({selectedRole}) => {
 
   
 
-  useEffect(() => {
+  useEffect(() => 
+  {
     fetch("http://93.127.199.85/api/ats/157industries/calling-lineup/871/Manager")
       .then((response) => response.json())
       .then((data) => {
@@ -41,17 +42,20 @@ const Recruiter = ({selectedRole}) => {
       });
   }, []);
 
-  const handleToggle = (id) => {
+  const handleToggle = (id) => 
+  {
     setExpandedCardId(expandedCardId === id ? null : id);
   };
 
   //   This is added by vaibhavi kawarkhe 
 
   
-  const handleFilterChange = () => {
+  const handleFilterChange = () => 
+  {
     let filtered = candidates;
 
-    if (keywordFilter) {
+    if (keywordFilter) 
+    {
       const keywordLower = keywordFilter.toLowerCase();
       filtered = filtered.filter((candidate) => (
         candidate.skills?.toLowerCase().includes(keywordLower) ||
@@ -107,10 +111,6 @@ const Recruiter = ({selectedRole}) => {
     handleFilterChange();
   }, [locationFilter, experienceFilter, salaryFilter, jobDesignationFilter, qualificationFilter, companyFilter, keywordFilter]);
 
-  const toggleFiltersVisibility = () => {
-    setIsFiltersVisible(!isFiltersVisible);
-  };
-
    // Handler for ViewJD button
    const handleViewJD = () => {
     setShowCandidateComponent(true); // Set to true to display Candidate component
@@ -136,6 +136,34 @@ const Recruiter = ({selectedRole}) => {
       setSelectedCandidateResume(null);
       setShowResume(false);
     };
+  const convertToDocumentLink = (byteCode, fileName) => {
+    if (byteCode) {
+      try {
+        const fileType = fileName.split(".").pop().toLowerCase();
+        const binary = atob(byteCode);
+        const array = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+          array[i] = binary.charCodeAt(i);
+        }
+        let blob;
+        if (fileType === "pdf") {
+          blob = new Blob([array], { type: "application/pdf" });
+        } else if (fileType === "docx") {
+          blob = new Blob([array], {
+            type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          });
+        } else {
+          return "Unsupported Document";
+        }
+        return URL.createObjectURL(blob);
+      } catch (error) {
+        console.error("Error converting byte code to document:", error);
+        return "Invalid Document";
+      }
+    }
+    return "Document Not Found";
+  };
+
   return (
     <div className="App">
       <div className="sidebar">
@@ -147,13 +175,6 @@ const Recruiter = ({selectedRole}) => {
         onChange={(e) => setKeywordFilter(e.target.value)}
       />
       
-     
-     <button className="toggle-filters" onClick={toggleFiltersVisibility}>
-        {/* {isFiltersVisible ? "Hide Filters" : "Show Filters"}
-        
-      </button>
-      {isFiltersVisible && ( */}
-      ShowFilters
         <div className="filters">
           <select value={locationFilter} onChange={(e) => setLocationFilter(e.target.value)}>
             <option value="">All Locations</option>
@@ -197,7 +218,7 @@ const Recruiter = ({selectedRole}) => {
             <option value="msys technologies">msys technologies</option>
           </select>
         </div>
-      </button>
+      
        {/* AddJD button below the Toggle Filters button */}
        <button className="add-jd-btn" onClick={handleAddJDClick}>
          AddJD
@@ -241,20 +262,24 @@ const Recruiter = ({selectedRole}) => {
         </div>
       )}
       
+      {/* This is done by vaibhavi kawarkhe Date: 24-10-2024*/}
      <div className="resume-display-section">
     {showResume && selectedCandidateResume ? (
         <div className="resume-file-div">
-            <div className="resume-content">
+            
                 <div className="resume-header">
+                    <div className="resume-title">
                     <h2>Resume</h2>
-                    <button className="close-button" onClick={closeResume}>X</button>
+                    </div>
+                    <div className="close-button">
+                    <button onClick={closeResume}>X</button>
+                    </div>
                 </div>
                 <iframe
                     src={convertToDocumentLink(selectedCandidateResume, "Resume.pdf")} // Ensure this function converts to a valid URL for the PDF
                     className="resume-iframe"
                     title="PDF Viewer"
-                ></iframe>
-            </div>
+                ></iframe>   
         </div>
     ) : (
         <div className="no-resume-message">
